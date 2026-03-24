@@ -1,22 +1,48 @@
-# Demo Instructions
+# Kinova Unseen Object Grasping Demo
 
-- For the simple original one: run
-    - roslaunch single_camera_demo setup_system.launch
-    - run simple.py
+A ROS-based demo for grasping previously unseen objects with a Kinova robotic arm using single-camera perception, manual calibration, and motion execution.
 
-- Facing an error:
-    - run robot_model.py to clear faults directly
+This project was built as a practical robotics demo to integrate perception, camera-to-robot calibration, and robot motion into an end-to-end grasping workflow.
 
-- Two user input requirement:
-    - Going to the top of the object
-    - Then going down
-    - b for restarting, q for re-selecting
+## Overview
 
+The goal of this project is to demonstrate a simple unseen-object grasping pipeline on a real robot system.
 
-- To set it up again:
-    - Firstly, put the marker into the desired place, make sure the direction is "facing to you", like shown in the pic below:
-    ![Marker Direction](pic/Image.jpeg "Correct marker orientation")
-    - Then hand recorded the position difference between the center of the marker and the robot, put it into the "static_transform_publisher" inside the steup_system.launch file, for the first three parameters of x,y,z
-    - Next, fire up the aruco_ros_single.launch, you can use any files, just make sure that is started, and rostopic echo the information of  "/aruco_single/transform", put that for the second static_transforma publisher (both position and orientation)
-    - After that, change values inside the publish_camera.py, to make sure values are consistent (probably only need to do it here, but do it both just to make sure)
-    - Then the transformation should be ready
+The demo combines:
+- a Kinova robotic arm
+- ROS-based system integration
+- single-camera perception
+- ArUco-assisted transform calibration
+- motion execution for top-down grasping
+
+The system is designed as a practical demo rather than a fully general grasping framework. It focuses on getting a complete perception-to-action pipeline running on real hardware.
+
+## What this project demonstrates
+
+- End-to-end integration of robot control and perception in ROS
+- Camera-to-robot transform setup for real-world deployment
+- Object approach and grasp execution on a Kinova platform
+- Practical handling of deployment issues such as system faults and reinitialization
+
+## System workflow
+
+The demo follows this high-level process:
+
+1. Launch the robot and perception system
+2. Set up or verify camera-to-robot transforms
+3. Detect the target object / target frame
+4. Move the robot above the object
+5. Move down for grasp execution
+6. Restart or reselect targets when needed
+
+## Repository structure
+
+```text
+.
+├── config/          # Configuration files
+├── launch/          # ROS launch files
+├── pic/             # Demo images / setup reference images
+├── src/             # Python source code
+├── CMakeLists.txt
+├── package.xml
+└── README.md
